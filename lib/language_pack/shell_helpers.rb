@@ -102,7 +102,7 @@ module LanguagePack
     # (denoted by ----->)
     # @param [String] topic message to be displayed
     def topic(message)
-      Kernel.puts "-----> #{message}"
+      Kernel.puts "#{timestamp}  -----> #{message}"
       $stdout.flush
     end
 
@@ -111,7 +111,7 @@ module LanguagePack
     # @param [String] message to be displayed
     def puts(message)
       message.to_s.split("\n").each do |line|
-        super "       #{line.strip}"
+        super "#{timestamp}         #{line.strip}"
       end
       $stdout.flush
     end
@@ -138,5 +138,9 @@ module LanguagePack
     def noshellescape(string)
       NoShellEscape.new(string)
     end
+
+    def timestamp
+      Time.now.utc.iso8601
+    end    
   end
 end
